@@ -5,6 +5,9 @@ on: [push, pull_request] # Runs on every push and PR
 jobs:
   cypress-run:
     runs-on: ubuntu-latest # You can use macOS or Windows if needed
+    strategy:
+      matrix:
+        containers: [1, 2, 3] # Runs tests in 3 parallel containers
 
     steps:
       - name: Checkout the code
