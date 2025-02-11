@@ -37,3 +37,6 @@ jobs:
         with:
           name: cypress-screenshots
           path: cypress/screenshots
+          - name: Delete Cypress videos (Optional)
+        if: always()
+        run: rm -rf cypress/videos/*
