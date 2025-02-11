@@ -10,12 +10,12 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v4
 
-      # - name: Install Node.js
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version: "18" # Use the version required for your project
-      # - name: Install dependencies
-      #   run: npm install # or yarn install if using Yarn
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18" # Use the version required for your project
+      - name: Install dependencies
+        run: npm install # or yarn install if using Yarn
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
         # with:
