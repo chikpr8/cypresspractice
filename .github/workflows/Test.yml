@@ -1,0 +1,41 @@
+name: Cypress Tests
+
+on: [push, pull_request] # Runs on every push and PR
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest # You can use macOS or Windows if needed
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18" # Use the version required for your project
+
+      - name: Install dependencies
+        run: npm install # or yarn install if using Yarn
+
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm run build # If needed, build the project
+          start: npm start # Start the app if required
+          wait-on: "http://localhost:3000" # Wait for the app to start
+          wait-on-timeout: 60 # Adjust timeout if needed
+
+      - name: Upload Cypress videos (Optional)
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-videos
+          path: cypress/videos
+
+      - name: Upload Cypress screenshots (Optional)
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
